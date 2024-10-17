@@ -2,5 +2,8 @@
 public
 storage
 /vendor
+bootstrap/cache
 .env
+composer.lock
+.editorconfig
 /.idea
