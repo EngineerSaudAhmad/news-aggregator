@@ -1,0 +1,49 @@
+services:
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        image: news-aggregator-app
+        container_name: news-aggregator-app
+        restart: unless-stopped
+        working_dir: /var/www/
+        volumes:
+            - ./:/var/www
+        networks:
+            - news-aggregator
+
+    nginx:
+        image: nginx:alpine
+        container_name: news-aggregator-nginx
+        restart: unless-stopped
+        ports:
+            - 8000:80
+        volumes:
+            - ./:/var/www
+            - ./docker/nginx:/etc/nginx/conf.d/
+        networks:
+            - news-aggregator
+
+    db:
+        image: mysql:8.0
+        container_name: news-aggregator-db
+        restart: unless-stopped
+        ports:
+            - 3306:3306
+        environment:
+            MYSQL_DATABASE: news_aggregator
+            MYSQL_ROOT_PASSWORD: secret
+            MYSQL_PASSWORD: secret
+            MYSQL_USER: admin
+        volumes:
+            - dbdata:/var/lib/mysql/
+        networks:
+            - news-aggregator
+
+networks:
+    news-aggregator:
+        driver: bridge
+
+volumes:
+    dbdata:
+        driver: local
