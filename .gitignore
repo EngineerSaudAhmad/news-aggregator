@@ -1,0 +1,6 @@
+/.phpunit.cache
+public
+storage
+/vendor
+.env
+/.idea
