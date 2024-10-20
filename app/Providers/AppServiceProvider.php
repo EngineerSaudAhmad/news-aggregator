@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Services\ArticleService;
 use App\Services\AuthService;
+use App\Services\Contracts\IArticleService;
 use App\Services\Contracts\IAuthService;
 use Illuminate\Support\ServiceProvider;
 
@@ -47,5 +49,6 @@ class AppServiceProvider extends ServiceProvider
     public function bootServiceDependencies(): void
     {
         $this->app->singleton(IAuthService::class, AuthService::class);
+        $this->app->singleton(IArticleService::class, ArticleService::class);
     }//end bootServiceDependencies
 }//end class

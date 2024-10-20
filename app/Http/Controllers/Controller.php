@@ -16,6 +16,13 @@ use Illuminate\Routing\Controller as BaseController;
  *          name="Engineer Saud",
  *          url="https://www.linkedin.com/in/Engineersaud"
  *      )
+ * ),
+ * @OA\SecurityScheme(
+ *        type="apiKey",
+ *        in="header",
+ *        securityScheme="bearerAuth",
+ *        name="Authorization",
+ *        description="Enter your bearer token in the format **Bearer &lt;token>**"
  * )
  */
 class Controller extends BaseController
