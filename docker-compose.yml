@@ -1,49 +1,52 @@
 services:
-    app:
+    news-aggregator-app:
+        container_name: news-aggregator-app
         build:
             context: .
-            dockerfile: Dockerfile
-        image: news-aggregator-app
-        container_name: news-aggregator-app
-        restart: unless-stopped
-        working_dir: /var/www/
+            dockerfile: ./docker/php/Dockerfile
+        expose:
+            - 9000
         volumes:
-            - ./:/var/www
+            - .:/usr/src/app
+            - ./public:/usr/src/app/public
+        depends_on:
+            - news-aggregator-db
         networks:
-            - news-aggregator
+            - app_network
 
-    nginx:
-        image: nginx:alpine
+    news-aggregator-nginx:
         container_name: news-aggregator-nginx
-        restart: unless-stopped
-        ports:
-            - 8000:80
+        build:
+            context: .
+            dockerfile: ./docker/nginx/Dockerfile
         volumes:
-            - ./:/var/www
-            - ./docker/nginx:/etc/nginx/conf.d/
+            - ./public:/usr/src/app/public
+        ports:
+            - 80:80
+        depends_on:
+            - news-aggregator-app
+        environment:
+            NGINX_FPM_HOST: news-aggregator-app
+            NGINX_ROOT: /usr/src/app/public
         networks:
-            - news-aggregator
+            - app_network
 
-    db:
-        image: mysql:8.0
+    news-aggregator-db:
         container_name: news-aggregator-db
-        restart: unless-stopped
+        image: mysql:latest
+        restart: always
+        volumes:
+            - ./storage/db-data:/var/lib/mysql
         ports:
             - 3306:3306
         environment:
             MYSQL_DATABASE: news_aggregator
-            MYSQL_ROOT_PASSWORD: secret
-            MYSQL_PASSWORD: secret
+            MYSQL_ROOT_PASSWORD: password
             MYSQL_USER: admin
-        volumes:
-            - dbdata:/var/lib/mysql/
+            MYSQL_PASSWORD: password
         networks:
-            - news-aggregator
+            - app_network
 
 networks:
-    news-aggregator:
+    app_network:
         driver: bridge
-
-volumes:
-    dbdata:
-        driver: local
