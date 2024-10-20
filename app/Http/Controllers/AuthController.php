@@ -1,19 +1,23 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Services\Contracts\IAuthService;
 
 
 /**
  * Class AuthController
  *
- * @package   App\Http\Controllers\Auth
+ * @package   App\Http\Controllers
  * @author    Engineer Saud <engr.saud94@gmail.com>
  * @copyright 2024 All rights reserved.
  * @since     Oct 20, 2024
  * @project   news-aggregator
+ *
+ * @OA\Tag(
+ *     name="Auth",
+ *     description="API Endpoints of User Authentication."
+ * )
  */
 abstract class AuthController extends Controller
 {

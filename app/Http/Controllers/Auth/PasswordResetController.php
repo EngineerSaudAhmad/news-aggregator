@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
-use Illuminate\Auth\Events\PasswordReset;
-use Illuminate\Validation\ValidationException;
 use Illuminate\Validation\Rules\Password as PasswordRule;
+use Illuminate\Validation\ValidationException;
 
 
 /**
@@ -36,7 +34,7 @@ class PasswordResetController extends AuthController
      *         )
      *     ),
      *     @OA\Response(response="200", description="Password reset link sent"),
-     *     @OA\Response(response="422", description="Validation error")
+     *     @OA\Response(response="422", description="Validation error"),
      *     @OA\Response(response="500", description="Something went wrong while processing.")
      * )
      */
@@ -72,7 +70,7 @@ class PasswordResetController extends AuthController
      *         )
      *     ),
      *     @OA\Response(response="200", description="Password reset successful"),
-     *     @OA\Response(response="422", description="Validation error")
+     *     @OA\Response(response="422", description="Validation error"),
      *     @OA\Response(response="500", description="Something went wrong while processing.")
      * )
      */
