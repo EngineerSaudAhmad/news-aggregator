@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Throwable;
 
@@ -24,7 +25,7 @@ class LogoutController extends AuthController
      *     summary="Logout the authenticated user",
      *     security={{"bearerAuth":{}}},
      *     @OA\Response(response="200", description="Logout successful"),
-     *     @OA\Response(response="500", description="Something went wrong while logging out.")
+     *     @OA\Response(response="500", description="Something went wrong while logging out."),
      *     @OA\Response(response="401", description="Unauthorized message.")
      * )
      */

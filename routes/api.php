@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\PasswordResetController;
@@ -20,13 +21,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/register', [RegisterController::class, 'register']);
 Route::get('/unauthorized-message', [LoginController::class, 'loginMessage'])->name('login');
-Route::post('/login', [LoginController::class, 'login'])->name('login');
+Route::post('/login', [LoginController::class, 'login']);
 Route::post('/forgot-password', [PasswordResetController::class, 'forgotPassword'])->name('password.request');
 Route::post('/reset-password', [PasswordResetController::class, 'resetPassword'])->name('password.reset');
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [LogoutController::class, 'logout']);
-
+    Route::get('/articles', [ArticleController::class, 'index']);
+    Route::get('/articles/{id}', [ArticleController::class, 'show']);
 });
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
