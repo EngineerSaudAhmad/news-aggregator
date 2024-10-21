@@ -9,72 +9,46 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 
 /**
- * Class Article
+ * Class UserPreference
  *
- * @package App\Models
+ * @package   App\Models
  * @author    Engineer Saud <engr.saud94@gmail.com>
  * @copyright 2024 All rights reserved.
  * @since     Oct 21, 2024
  * @project   news-aggregator
  *
  * @var int      $id
+ * @var int      $user_id
  * @var int      $source_id
  * @var int      $category_id
- * @var string   $title
- * @var string   $content
  * @var string   $author
- * @var Carbon   $published_at
  * @var Carbon   $created_at
  * @var Carbon   $updated_at
- * @var Category $category
+ * @var User     $user
  * @var Source   $source
+ * @var Category $category
  */
-class Article extends Model
+class UserPreference extends Model
 {
     use HasFactory;
 
-
-    /**
-     * Property fillable
-     *
-     * @var string[]
-     */
     protected $fillable = [
-        'title',
-        'content',
-        'author',
-        'published_at',
+        'user_id',
         'source_id',
-        'category_id'
+        'category_id',
+        'author'
     ];
 
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }//end user()
 
-    /**
-     * Property casts
-     *
-     * @var string[]
-     */
-    protected $casts = [
-        'published_at' => 'datetime',
-    ];
-
-
-    /**
-     * Function category
-     *
-     * @return BelongsTo
-     */
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }//end category()
 
-
-    /**
-     * Function source
-     *
-     * @return BelongsTo
-     */
     public function source(): BelongsTo
     {
         return $this->belongsTo(Source::class);

@@ -6,6 +6,8 @@ use App\Services\ArticleService;
 use App\Services\AuthService;
 use App\Services\Contracts\IArticleService;
 use App\Services\Contracts\IAuthService;
+use App\Services\Contracts\IUserPreferenceService;
+use App\Services\UserPreferenceService;
 use Illuminate\Support\ServiceProvider;
 
 
@@ -50,5 +52,6 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->singleton(IAuthService::class, AuthService::class);
         $this->app->singleton(IArticleService::class, ArticleService::class);
+        $this->app->singleton(IUserPreferenceService::class, UserPreferenceService::class);
     }//end bootServiceDependencies
 }//end class

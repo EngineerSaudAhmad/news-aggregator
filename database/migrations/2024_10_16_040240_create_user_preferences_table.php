@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('source_id')->constrained('sources');
             $table->foreignId('category_id')->constrained('categories');
+            $table->string('author')->nullable();
             $table->timestamps();
         });
     }

@@ -37,4 +37,16 @@ interface IArticleService extends IService
      * @return array|null
      */
     public function findById(int $id): ?array;
+
+
+    /**
+     * Function findByPreferences
+     *
+     * @param array $sourceIds
+     * @param array $categoryIds
+     * @param array $authors
+     *
+     * @return Collection|LengthAwarePaginator|array
+     */
+    public function findByPreferences(array $sourceIds = [], array $categoryIds = [], array $authors = []): Collection|LengthAwarePaginator|array;
 }//end interface
