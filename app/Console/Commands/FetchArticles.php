@@ -124,6 +124,24 @@ class FetchArticles extends Command
                 if (!empty($response['totalResults'])) {
                     return $response['articles'] ?? [];
                 }
+            } elseif ($source->name === 'TheGuardian') {
+                $articleData = [];
+                $response = Http::get("$source->url", [
+                    'api-key' => config("sources.$source->name.api_key"),
+                    'from-date' => Carbon::today()->toDateString(),
+                ]);
+
+                if (!empty($response->json()['response']['results'])) {
+                    foreach ($response->json()['response']['results'] as $key => $data) {
+                        $articleData[$key]['title'] = $data['webTitle'];
+                        $articleData[$key]['content'] = $data['webTitle'];
+                        $articleData[$key]['publishedAt'] = Carbon::parse($doc['webPublicationDate'] ?? Carbon::today()->toDateString())->toDateTimeString();
+                        $articleData[$key]['author'] = null;
+                        $articleData[$key]['category'] = $doc['sectionName'] ?? null;
+                    }
+                }
+
+                return $articleData;
             } elseif ($source->name === 'NewYorkTimes') {
                 $articleData = [];
                 $response = Http::get("$source->url", [
