@@ -4,6 +4,7 @@ namespace App\Services;
 
 
 use App\Services\Contracts\IService;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class BaseService
@@ -17,4 +18,10 @@ use App\Services\Contracts\IService;
 abstract class BaseService implements IService
 {
 
+    /**
+     * Property model
+     *
+     * @var Model
+     */
+    protected Model $model;
 }//end class
