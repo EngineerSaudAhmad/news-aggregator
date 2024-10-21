@@ -18,12 +18,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @since     Oct 21, 2024
  * @project   news-aggregator
  *
- * @var int                  id
- * @var string               name
- * @var string               url
- * @var Carbon               created_at
- * @var Carbon               updated_at
- * @var Collection|Article[] articles
+ * @var int                  $id
+ * @var string               $name
+ * @var string               $url
+ * @var Carbon               $created_at
+ * @var Carbon               $updated_at
+ * @var Collection|Article[] $articles
  */
 class Source extends Model
 {

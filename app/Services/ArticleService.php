@@ -19,15 +19,8 @@ use Throwable;
  * @since     Oct 20, 2024
  * @project   news-aggregator
  */
-class ArticleService implements IArticleService
+class ArticleService extends BaseService implements IArticleService
 {
-
-    /**
-     * Property model
-     *
-     * @var Article
-     */
-    private Article $model;
 
 
     /**
@@ -94,4 +87,22 @@ class ArticleService implements IArticleService
 
         return null;
     }//end findById()
+
+
+    /**
+     * @inheritdoc
+     */
+    public function findByPreferences(
+        array $sourceIds = [],
+        array $categoryIds = [],
+        array $authors = []
+    ): Collection|LengthAwarePaginator|array {
+        $articles = $this->model->whereIn('source_id', $sourceIds)
+            ->whereIn('category_id', $categoryIds)
+            ->whereIn('author', $authors)
+            ->latest('published_at')
+            ->paginate(15);
+
+        return $articles;
+    }//end findByPreferences()
 }//end class
