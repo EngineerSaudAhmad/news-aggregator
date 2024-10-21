@@ -25,6 +25,7 @@ class LoginController extends AuthController
      * @OA\Post(
      *     path="/api/login",
      *     summary="Authenticate a user",
+     *     tags={"Auth"},
      *     @OA\RequestBody(
      *         @OA\JsonContent(
      *             required={"email","password"},
@@ -73,6 +74,7 @@ class LoginController extends AuthController
      * @OA\Get(
      *     path="/api/unauthorized-message",
      *     summary="Return unauthorized response for routes required authentication.",
+     *     tags={"Auth"},
      *     @OA\Response(
      *         response="401",
      *         description="Unauthorized message.",

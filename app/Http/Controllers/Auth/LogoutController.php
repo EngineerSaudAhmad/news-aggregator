@@ -23,6 +23,7 @@ class LogoutController extends AuthController
      * @OA\Post(
      *     path="/api/logout",
      *     summary="Logout the authenticated user",
+     *     tags={"Auth"},
      *     security={{"bearerAuth":{}}},
      *     @OA\Response(response="200", description="Logout successful"),
      *     @OA\Response(response="500", description="Something went wrong while logging out."),

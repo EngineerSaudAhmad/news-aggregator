@@ -27,6 +27,7 @@ class RegisterController extends AuthController
      * @OA\Post(
      *     path="/api/register",
      *     summary="Register a new user",
+     *     tags={"Auth"},
      *     @OA\RequestBody(
      *         @OA\JsonContent(
      *             required={"name","email","password","password_confirmation"},

@@ -27,6 +27,7 @@ class PasswordResetController extends AuthController
      * @OA\Post(
      *     path="/api/forgot-password",
      *     summary="Send a password reset link",
+     *     tags={"Auth"},
      *     @OA\RequestBody(
      *         @OA\JsonContent(
      *             required={"email"},
@@ -60,6 +61,7 @@ class PasswordResetController extends AuthController
      * @OA\Post(
      *     path="/api/reset-password",
      *     summary="Reset the user's password",
+     *     tags={"Auth"},
      *     @OA\RequestBody(
      *         @OA\JsonContent(
      *             required={"token","email","password","password_confirmation"},
